@@ -25,9 +25,12 @@ jobs:
       run: |
         mkdir -p output/helm-charts/
         helm package deploy/charts/oldmonk/ -d output/helm-charts/
+    - run: 
     - name: Reindex repo
+    - run: cat output/helm-carts/*
       run: helm repo index output/helm-charts/
-    - run: ls -la output/
+    - run: ls -la output/helm-carts/
+    - run: cat output/helm-carts/*
     - name: Release
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
