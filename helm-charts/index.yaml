@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   oldmonk:
   - apiVersion: v1
-    created: "2020-03-13T20:50:57.882196357Z"
+    created: "2020-03-13T21:13:23.974512666Z"
     description: Chart of oldmonk
-    digest: aecf2117a846a1464a649d2a9be2d97cd8471140e74c846e8291a31ad416b710
+    digest: 963f4f36929f5739e4f1378da43be08991b49b149babba9029157e2084e4961e
     icon: https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png
     maintainers:
     - email: suporte@ganex.com.br
@@ -13,4 +13,4 @@ entries:
     urls:
     - oldmonk-0.0.6.tgz
     version: 0.0.6
-generated: "2020-03-13T20:50:57.881709756Z"
+generated: "2020-03-13T21:13:23.974049369Z"
