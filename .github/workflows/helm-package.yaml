@@ -9,18 +9,25 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - run: |
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+    - name: Install Helm
+      run: |
         curl -sSLo get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get
         chmod 700 get_helm.sh
         ./get_helm.sh
         helm init --client-only
-    - run: helm lint deploy/charts/oldmonk/
-    - run: mkdir -p output/helm-charts/
-    - run: helm package deploy/charts/oldmonk/ -d output/helm-charts/
-    - run: helm repo index output/helm-charts/ --merge deploy/charts/oldmonk/index.yaml
-    - run: ls -la output/
-    - name: Build and Deploy
+    - name: Check sintax
+      run: helm lint deploy/charts/oldmonk/
+    - name: Create package
+      run: |
+        mkdir -p output/helm-charts/
+        helm package deploy/charts/oldmonk/ -d output/helm-charts/
+    - name: Reindex repo
+      run: helm repo index output/helm-charts/ --merge deploy/charts/oldmonk/index.yaml
+    - name: Release
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         ACCESS_TOKEN: cc2b083ec53804405da2718e4befacccd7a450bd
