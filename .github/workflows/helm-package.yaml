@@ -10,20 +10,21 @@ jobs:
     name: Install dependencies
     runs-on: ubuntu-latest
     steps:
+    - uses: 'actions/checkout@v1'
     - run: |
         curl -sSLo get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get
         chmod 700 get_helm.sh
         ./get_helm.sh
-    - uses: 'actions/checkout@v1'
-    - run: helm init --client-only
-    - run: helm lint oldmonk/
-      working-directory: deploy/charts/
-    - run: ls -la
-    - run: mkdir output/
-    - run: helm package deploy/charts/oldmonk/ -d output/
-    - run: helm repo index output/ --merge deploy/charts/oldmonk/index.yaml
-    - run: ls -la
-    - run: mv output/* deploy/charts/oldmonk/
-    - run: git add .
-    - run: git commit -m 'test'
-    - run: git push -u origin master
+        helm init --client-only
+        helm lint deploy/charts/oldmonk/
+        ls -la
+        mkdir output/
+        helm package deploy/charts/oldmonk/ -d output/
+        helm repo index output/ --merge deploy/charts/oldmonk/index.yaml
+        ls -la
+        mv output/* deploy/charts/oldmonk/
+        git add .
+        git config --global user.email caio@ganex.com.br
+        git config --local user.name "GitHub Action"
+        git commit -m 'test'
+        git push -u origin master
