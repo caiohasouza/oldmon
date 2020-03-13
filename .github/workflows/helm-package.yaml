@@ -6,7 +6,7 @@ on:
     paths:
     - 'deploy/charts/oldmonk/**'
 jobs:
-  release:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -30,6 +30,6 @@ jobs:
     - name: Release
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
-        ACCESS_TOKEN: cc2b083ec53804405da2718e4befacccd7a450bd
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages 
         FOLDER: output
