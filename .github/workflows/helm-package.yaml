@@ -19,6 +19,7 @@ jobs:
     - run: helm lint oldmonk/
       working-directory: deploy/charts/
     - run: ls -la
+    - run: mkdir /output/
     - run: helm package deploy/charts/oldmonk/ -d /output/
     - run: helm repo index /output/ --merge deploy/charts/oldmonk/index.yaml
     - run: ls -la
