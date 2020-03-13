@@ -22,7 +22,7 @@ jobs:
     - run: helm package deploy/charts/oldmonk/ -d output/
     - run: helm repo index output/ --merge deploy/charts/oldmonk/index.yaml
     - run: ls -la
-    - run: mv output/* deploy/charts/oldmonk/
+    - run: mv output/*
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
