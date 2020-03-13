@@ -6,7 +6,7 @@ on:
     paths:
     - 'deploy/charts/oldmonk/**'
 jobs:
-  install:
+  release:
     name: Install dependencies
     runs-on: ubuntu-latest
     steps:
@@ -14,24 +14,12 @@ jobs:
         curl -sSLo get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get
         chmod 700 get_helm.sh
         ./get_helm.sh
-  test:
-    name: test
-    runs-on: ubuntu-latest
-    steps:
     - uses: 'actions/checkout@v1'
     - run: helm init --client-only
     - run: helm lint oldmonk/
       working-directory: deploy/charts/
-  package:
-    name: package
-    runs-on: ubuntu-latest
-    steps:
     - run: ls -la
     - run: helm package deploy/charts/oldmonk/
     - run: helm repo index oldmonk/ --url https://caiohasouza.github.io/test-oldmonk/deploy/charts/oldmonk/
     - run: ls -la
-  release:
-    name: release
-    runs-on: ubuntu-latest
-    steps:
     - run: git push -u origin master
