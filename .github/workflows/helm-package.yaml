@@ -27,7 +27,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: 'actions/checkout@v1'
-    - run: helm package oldmonk/ --destination /github/home/pkg/
+    - run: helm package deploy/charts/oldmonk/ --destination
       working-directory: deploy/charts/
-    - run: helm repo index oldmonk/ --destination /github/home/pkg/
-      working-directory: deploy/charts/
+    - run: helm repo index oldmonk/ --url https://caiohasouza.github.io/test-oldmonk/deploy/charts/oldmonk/
+    - run: ls -la
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: 'actions/checkout@v1'
+    - run: git push -u origin master
