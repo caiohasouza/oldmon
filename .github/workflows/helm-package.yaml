@@ -10,7 +10,7 @@ jobs:
     name: Install dependencies
     runs-on: ubuntu-latest
     steps:
-    - uses: 'actions/checkout@v1'
+    - uses: actions/checkout@master
     - run: |
         curl -sSLo get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get
         chmod 700 get_helm.sh
@@ -23,10 +23,9 @@ jobs:
     - run: helm repo index output/ --merge deploy/charts/oldmonk/index.yaml
     - run: ls -la
     - run: mv output/* deploy/charts/oldmonk/
-    - run: git add .
-    - run: git config --global user.email caio@ganex.com.br
-    - run: git config --local user.name "GitHub Action"
-    - run: git commit -m 'test'
-    - run: git remote -v
-    - run: git branch
-    - run: git push -u origin gh-pages
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: cc2b083ec53804405da2718e4befacccd7a450bd
+        BRANCH: gh-pages 
+        FOLDER: output
