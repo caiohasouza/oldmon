@@ -26,9 +26,7 @@ jobs:
         mkdir -p output/helm-charts/
         helm package deploy/charts/oldmonk/ -d output/helm-charts/
     - name: Reindex repo
-      run: helm repo index output/helm-charts/oldmonk/
-    - run: ls -la output/helm-charts/
-    - run: cat output/helm-charts/index.yaml
+      run: helm repo index --url http://caiohasouza.github.io/test-oldmonk/helm-charts output/helm-charts/
     - name: Release
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
