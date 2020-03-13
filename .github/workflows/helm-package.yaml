@@ -27,9 +27,10 @@ jobs:
         helm package deploy/charts/oldmonk/ -d output/helm-charts/
     - name: Reindex repo
       run: helm repo index output/helm-charts/ --merge deploy/charts/oldmonk/index.yaml
+    run: ls -la output/
     - name: Release
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages 
-        FOLDER: output
+        FOLDER: output/
