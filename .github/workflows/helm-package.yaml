@@ -18,7 +18,7 @@ jobs:
         helm init --client-only
         helm lint deploy/charts/oldmonk/
     - run: ls -la
-    - run: mkdir output/helm-charts/
+    - run: mkdir -p output/helm-charts/
     - run: helm package deploy/charts/oldmonk/ -d output/helm-charts/
     - run: helm repo index output/helm-charts/ --merge deploy/charts/oldmonk/index.yaml
     - name: Build and Deploy
