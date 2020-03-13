@@ -25,7 +25,6 @@ jobs:
       run: |
         mkdir -p output/helm-charts/
         helm package deploy/charts/oldmonk/ -d output/helm-charts/
-    - run: 
     - name: Reindex repo
     - run: cat output/helm-carts/*
     - run: helm repo index output/helm-charts/
