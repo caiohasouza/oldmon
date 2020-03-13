@@ -6,7 +6,7 @@ on:
     paths:
     - 'deploy/charts/oldmonk/**'
 jobs:
-  test:
+  install:
     name: Install dependencies
     runs-on: ubuntu-latest
     steps:
