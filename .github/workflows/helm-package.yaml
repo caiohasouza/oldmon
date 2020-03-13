@@ -6,8 +6,7 @@ on:
     paths:
     - 'deploy/charts/oldmonk/**'
 jobs:
-  release:
-    name: Install dependencies
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -16,11 +15,16 @@ jobs:
         chmod 700 get_helm.sh
         ./get_helm.sh
         helm init --client-only
-        helm lint deploy/charts/oldmonk/
-    - run: ls -la
+    - run: helm lint deploy/charts/oldmonk/
+  package:
+    runs-on: ubuntu-latest
+    steps:
     - run: mkdir -p output/helm-charts/
     - run: helm package deploy/charts/oldmonk/ -d output/helm-charts/
     - run: helm repo index output/helm-charts/ --merge deploy/charts/oldmonk/index.yaml
+  release:
+    runs-on: ubuntu-latest
+    steps:
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
