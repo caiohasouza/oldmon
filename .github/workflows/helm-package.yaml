@@ -19,13 +19,12 @@ jobs:
         helm lint deploy/charts/oldmonk/
     - run: ls -la
     - run: mkdir output/
-    - run: helm package deploy/charts/oldmonk/ -d output/
-    - run: helm repo index output/ --merge deploy/charts/oldmonk/index.yaml
-    - run: ls -la
-    - run: mv output/*
+    - run: helm package deploy/charts/oldmonk/ -d helm-charts/
+    - run: helm repo index helm-charts/ --merge deploy/charts/oldmonk/index.yaml
+    - run: ls -la helm-charts/
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         ACCESS_TOKEN: cc2b083ec53804405da2718e4befacccd7a450bd
         BRANCH: gh-pages 
-        FOLDER: output
+        FOLDER: helm-charts/
