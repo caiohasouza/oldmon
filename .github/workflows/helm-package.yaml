@@ -17,14 +17,14 @@ jobs:
         ./get_helm.sh
         helm init --client-only
         helm lint deploy/charts/oldmonk/
-        ls -la
-        mkdir output/
-        helm package deploy/charts/oldmonk/ -d output/
-        helm repo index output/ --merge deploy/charts/oldmonk/index.yaml
-        ls -la
-        mv output/* deploy/charts/oldmonk/
-        git add .
-        git config --global user.email caio@ganex.com.br
-        git config --local user.name "GitHub Action"
-        git commit -m 'test'
-        git push -u origin master
+    - run: ls -la
+    - run: mkdir output/
+    - run: helm package deploy/charts/oldmonk/ -d output/
+    - run: helm repo index output/ --merge deploy/charts/oldmonk/index.yaml
+    - run: ls -la
+    - run: mv output/* deploy/charts/oldmonk/
+    - run: git add .
+    - run: git config --global user.email caio@ganex.com.br
+    - run: git config --local user.name "GitHub Action"
+    - run: git commit -m 'test'
+    - run: git push -u origin master
