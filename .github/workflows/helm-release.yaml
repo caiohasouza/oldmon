@@ -8,9 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
     env:
       HELM_CHART_URL: "http://caiohasouza.github.io/test-oldmonk/helm-charts/"
+    steps:
     - name: Checkout
       uses: actions/checkout@v2
       with:
