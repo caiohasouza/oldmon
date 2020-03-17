@@ -2,6 +2,18 @@ apiVersion: v1
 entries:
   oldmonk:
   - apiVersion: v1
+    created: "2020-03-17T13:32:12.183867549Z"
+    description: Chart of oldmonk
+    digest: feb4a22a13d8a473a60ec81948647f937f4c29f422bc37376a667614615f73a9
+    icon: https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png
+    maintainers:
+    - email: suporte@ganex.com.br
+      name: Ganex
+    name: oldmonk
+    urls:
+    - https://caiohasouza.github.io/test-oldmonk/helm-charts/oldmonk-0.0.21.tgz
+    version: 0.0.21
+  - apiVersion: v1
     created: "2020-03-17T13:30:19.486489508Z"
     description: Chart of oldmonk
     digest: fb6c62fdc9dd924dbf01ade3908ba4d57a37d0311cb21d60355acec9b5e6c2e3
@@ -25,4 +37,4 @@ entries:
     urls:
     - https://caiohasouza.github.io/test-oldmonk/helm-charts/oldmonk-0.0.19.tgz
     version: 0.0.19
-generated: "2020-03-17T13:30:19.485916611Z"
+generated: "2020-03-17T13:32:12.18323925Z"
