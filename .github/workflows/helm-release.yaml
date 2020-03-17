@@ -39,6 +39,8 @@ jobs:
         helm package deploy/charts/oldmonk/ -d output/helm-charts/
     - name: Reindex repo
       run: helm repo index --merge output/helm-charts/index.yaml --url ${{ env.HELM_CHART_URL }} output/helm-charts/
+    - name: Check sintax
+      run: cat output/helm-charts/index.yaml
     - name: Release
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
