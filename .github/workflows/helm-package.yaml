@@ -21,7 +21,7 @@ jobs:
         helm init --client-only
     - name: Check Chart Version
       run: |
-        helm repo add evalsocket/oldmonk http://caiohasouza.github.io/test-oldmonk/helm-charts/
+        helm repo add evalsocket http://caiohasouza.github.io/test-oldmonk/helm-charts/
         helm search evalsocket/oldmonk --version `cat deploy/charts/oldmonk/Chart.yaml | grep '^version: [[:alnum:]]' | awk '{print $2}'` > HELM_CHART_STATUS.txt
         HELM_CHART_STATUS=`cat HELM_CHART_STATUS.txt`
         if [ "${HELM_CHART_STATUS}" != 'No results found' ]; then
