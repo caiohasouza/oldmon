@@ -24,7 +24,7 @@ jobs:
         helm init --client-only
     - name: Check Chart Version
       run: |
-        helm repo add evalsocket ${HELM_CHART_URL}
+        helm repo add evalsocket ${{ env.HELM_CHART_URL }}
         helm search evalsocket/oldmonk --version `cat deploy/charts/oldmonk/Chart.yaml | grep '^version: [[:alnum:]]' | awk '{print $2}'` > HELM_CHART_STATUS.txt
         HELM_CHART_STATUS=`cat HELM_CHART_STATUS.txt`
         if [ "${HELM_CHART_STATUS}" != 'No results found' ]; then
@@ -38,7 +38,7 @@ jobs:
         mkdir -p output/helm-charts/
         helm package deploy/charts/oldmonk/ -d output/helm-charts/
     - name: Reindex repo
-      run: helm repo index --merge output/helm-charts/index.yaml --url ${HELM_CHART_URL}
+      run: helm repo index --merge output/helm-charts/index.yaml --url ${{ env.HELM_CHART_URL }}
     - name: Release
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
