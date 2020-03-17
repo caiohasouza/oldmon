@@ -6,10 +6,10 @@ on:
     paths:
     - 'deploy/charts/oldmonk/**'
 env:
-  HELM_CHART_URL: "http://caiohasouza.github.io/test-oldmonk/helm-charts/"
-  
+  HELM_CHART_URL: "https://caiohasouza.github.io/test-oldmonk/helm-charts/"
+
 jobs:
-  deploy:
+  release:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
