@@ -9,6 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+    env:
+      HELM_CHART_URL: "http://caiohasouza.github.io/test-oldmonk/helm-charts/"
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -21,7 +23,7 @@ jobs:
         helm init --client-only
     - name: Check Chart Version
       run: |
-        helm repo add evalsocket http://caiohasouza.github.io/test-oldmonk/helm-charts/
+        helm repo add evalsocket ${HELM_CHART_URL}
         helm search evalsocket/oldmonk --version `cat deploy/charts/oldmonk/Chart.yaml | grep '^version: [[:alnum:]]' | awk '{print $2}'` > HELM_CHART_STATUS.txt
         HELM_CHART_STATUS=`cat HELM_CHART_STATUS.txt`
         if [ "${HELM_CHART_STATUS}" != 'No results found' ]; then
@@ -35,7 +37,7 @@ jobs:
         mkdir -p output/helm-charts/
         helm package deploy/charts/oldmonk/ -d output/helm-charts/
     - name: Reindex repo
-      run: helm repo index --merge output/helm-charts/index.yaml --url https://caiohasouza.github.io/test-oldmonk/helm-charts/ output/helm-charts/
+      run: helm repo index --merge output/helm-charts/index.yaml --url ${HELM_CHART_URL}
     - name: Release
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
