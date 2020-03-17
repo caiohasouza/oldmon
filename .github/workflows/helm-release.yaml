@@ -5,11 +5,12 @@ on:
     - master
     paths:
     - 'deploy/charts/oldmonk/**'
+env:
+  HELM_CHART_URL: "http://caiohasouza.github.io/test-oldmonk/helm-charts/"
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      HELM_CHART_URL: "http://caiohasouza.github.io/test-oldmonk/helm-charts/"
     steps:
     - name: Checkout
       uses: actions/checkout@v2
