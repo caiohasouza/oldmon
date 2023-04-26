@@ -38,25 +38,25 @@ if __name__ == "__main__":
     job_name = os.environ['JOB_NAME']
     build_url = os.environ['BUILD_URL']
     job_url = os.environ['JOB_URL']
-    job_status = os.environ['CURRENT_BUILD_RESULT']
-    job_status_previous = os.environ['PREVIOUS_BUILD_RESULT']
-    #job_status = os.environ['BUILD_RESULT']
+    #job_status = os.environ['CURRENT_BUILD_RESULT']
+    #job_status_previous = os.environ['PREVIOUS_BUILD_RESULT']
+    job_status = os.environ['BUILD_STATUS']
     priority = os.environ.get('PRIORITY', "P3")
 
-    #if (job_status == "FAILURE") or (job_status == "UNSTABLE") or (job_status == "ABORTED"):
-    #    post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "trigger", job_status, priority))
-    #elif (job_status == "SUCCESS"):
-    #    post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "resolve", job_status, priority))
+    if (job_status == "FAILURE") or (job_status == "UNSTABLE") or (job_status == "ABORTED"):
+        post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "trigger", job_status, priority))
+    elif (job_status == "SUCCESS"):
+        post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "resolve", job_status, priority))
     #if (job_status_previous == "SUCCESS") and ((job_status == "UNSTABLE") or (job_status == "ABORTED") or (job_status == "FAILURE")):
     #    post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "trigger", job_status, priority))
     #    print ("Creating an incident in Squadcast!")
     #elif ((job_status_previous == "UNSTABLE") or (job_status_previous == "ABORTED") or (job_status_previous == "FAILURE")) and (job_status == "SUCCESS"):
     #    post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "resolve", job_status, priority))
     #    print ("Resolving an incident in Squadcast!")
-    if ((job_status_previous == "UNSTABLE") or (job_status_previous == "ABORTED") or (job_status_previous == "FAILURE")) and (job_status == "SUCCESS"):
-        post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "resolve", job_status, priority))
-        print ("Resolving an incident in Squadcast!")
-    else:
-    #    print ("Not required to create an incident..")
-        post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "trigger", job_status, priority))
-        print ("Creating an incident in Squadcast!")
+    #if ((job_status_previous == "UNSTABLE") or (job_status_previous == "ABORTED") or (job_status_previous == "FAILURE")) and (job_status == "SUCCESS"):
+    #    post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "resolve", job_status, priority))
+    #    print ("Resolving an incident in Squadcast!")
+    #else:
+    ##    print ("Not required to create an incident..")
+    #    post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "trigger", job_status, priority))
+    #    print ("Creating an incident in Squadcast!")
