@@ -47,11 +47,16 @@ if __name__ == "__main__":
     #    post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "trigger", job_status, priority))
     #elif (job_status == "SUCCESS"):
     #    post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "resolve", job_status, priority))
-    if (job_status_previous == "SUCCESS") and ((job_status == "UNSTABLE") or (job_status == "ABORTED") or (job_status == "FAILURE")):
-        post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "trigger", job_status, priority))
-        print ("Creating an incident in Squadcast!")
-    elif ((job_status_previous == "UNSTABLE") or (job_status_previous == "ABORTED") or (job_status_previous == "FAILURE")) and (job_status == "SUCCESS"):
+    #if (job_status_previous == "SUCCESS") and ((job_status == "UNSTABLE") or (job_status == "ABORTED") or (job_status == "FAILURE")):
+    #    post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "trigger", job_status, priority))
+    #    print ("Creating an incident in Squadcast!")
+    #elif ((job_status_previous == "UNSTABLE") or (job_status_previous == "ABORTED") or (job_status_previous == "FAILURE")) and (job_status == "SUCCESS"):
+    #    post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "resolve", job_status, priority))
+    #    print ("Resolving an incident in Squadcast!")
+    if ((job_status_previous == "UNSTABLE") or (job_status_previous == "ABORTED") or (job_status_previous == "FAILURE")) and (job_status == "SUCCESS"):
         post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "resolve", job_status, priority))
         print ("Resolving an incident in Squadcast!")
     else:
-        print ("Not required to create an incident..")
+    #    print ("Not required to create an incident..")
+        post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "trigger", job_status, priority))
+        print ("Creating an incident in Squadcast!")
