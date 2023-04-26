@@ -38,8 +38,7 @@ if __name__ == "__main__":
     job_name = os.environ['JOB_NAME']
     build_url = os.environ['BUILD_URL']
     job_url = os.environ['JOB_URL']
-    job_status = os.environ['CURRENT_BUILD_RESULT']
-    job_status_previous = os.environ['PREVIOUS_BUILD_RESULT']
+    job_status = os.environ['BUILD_STATUS']
     #job_status = os.environ['BUILD_RESULT']
     priority = os.environ.get('PRIORITY', "P3")
 
