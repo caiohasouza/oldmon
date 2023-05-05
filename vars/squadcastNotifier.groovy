@@ -3,8 +3,10 @@
 def call() {
   echo "antes"
   def BUILD_STATUS = currentBuild.currentResult
-  if (env.PRIORITY == null) {
+  if (env.PRIORITY) {
     def PRIORITY = "P3"
+  } else {
+    def PRIORITY = "P5"
   }
   sh "echo ${PRIORITY}"
   final file = libraryResource('jenkins-squadcast-notifications.py')
