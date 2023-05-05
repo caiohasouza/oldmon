@@ -3,7 +3,7 @@
 def call() {
   echo "antes"
   def BUILD_STATUS = currentBuild.currentResult
-  if (!"${env.PRIORITY}"?.trim()) {
+  if (!${env.PRIORITY}?.trim()) {
     def PRIORITY = "P3"
   }
   sh "echo ${PRIORITY}"
