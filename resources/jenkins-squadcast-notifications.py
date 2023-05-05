@@ -32,12 +32,12 @@ def post_to_url(url, payload):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Passing build information.')
-    parser.add_argument('--url', help='Squadcast API endpoint')
-    parser.add_argument('--build-number', help='Jenkins Build Number')
-    parser.add_argument('--job-name', help='Jenkins Job Name')
-    parser.add_argument('--build-url', help='Jenkins Build URL')
-    parser.add_argument('--job-url', help='Jenkins Job URL')
-    parser.add_argument('--build-status', help='Jenkins Build Status')
+    parser.add_argument('--url', help='Squadcast API endpoint', default=os.environ['SQUADCAST_URL'])
+    parser.add_argument('--build-number', help='Jenkins Build Number'default=int(os.environ['BUILD_NUMBER']))
+    parser.add_argument('--job-name', help='Jenkins Job Name'default=os.environ['JOB_NAME'])
+    parser.add_argument('--build-url', help='Jenkins Build URL'default=os.environ['BUILD_URL'])
+    parser.add_argument('--job-url', help='Jenkins Job URL'default=os.environ['JOB_URL'])
+    parser.add_argument('--build-status', help='Jenkins Build Status'default=os.environ['BUILD_STATUS'])
     parser.add_argument('--priority', help='Squadcast Priority', default="P3")
     args = parser.parse_args()    
     #squadcast_url = os.environ['SQUADCAST_URL']
