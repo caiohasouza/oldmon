@@ -3,14 +3,28 @@
 def call() {
   echo "antes"
   def BUILD_STATUS = currentBuild.currentResult
-  def PRIORITY
-  def ADDITIONAL_ARGS
-  if (PRIORITY == null) {
-    def ADDITIONAL_ARGS = "--priority P3"
+  //def PRIORITY
+  //def ADDITIONAL_ARGS
+  //if (PRIORITY == null) {
+  //  def ADDITIONAL_ARGS = "--priority P3"
+  //} else {
+  //  def ADDITIONAL_ARGS = "P5"
+  //}
+  //sh "echo ${ADDITIONAL_ARGS}"
+  def serviceNameVar
+  def dockerPath
+  def imageTagVar
+
+  // for backward compatibility
+  if(serviceName != null) {
+      serviceNameVar = "serviceName"
+      dockerPath = "dockerRepo"
+      imageTagVar = "imageTag"
   } else {
-    def ADDITIONAL_ARGS = "P5"
+      serviceNameVar = "env.serviceName"
+      dockerPath = "env.dockerPath"
+      imageTagVar = "env.imageTag"
   }
-  sh "echo ${ADDITIONAL_ARGS}"
   final file = libraryResource('jenkins-squadcast-notifications.py')
   writeFile(file: 'jenkins-squadcast-notifications.py', text: file)
   //sh('chmod +x my_file.py && ./my_file.py')
