@@ -7,5 +7,6 @@ def call() {
   sh "echo ${BUILD_STATUS}"
   sh "export BUILD_STATUS=${BUILD_STATUS}"
   sh "printenv"
-  sh "curl https://raw.githubusercontent.com/caiohasouza/test-oldmonk/test/jenkins-squadcast-notifications.py | python3 -"
+  sh "ls -la"
+  sh "curl https://raw.githubusercontent.com/caiohasouza/test-oldmonk/test/jenkins-squadcast-notifications.py | python3 - ${BUILD_STATUS}"
 }
