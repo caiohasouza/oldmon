@@ -38,7 +38,7 @@ if __name__ == "__main__":
     parser.add_argument('--build-url', help='Jenkins Build URL')
     parser.add_argument('--job-url', help='Jenkins Job URL')
     parser.add_argument('--build-status', help='Jenkins Build Status')
-    parser.add_argument('--priority', help='Squadcast Priority')
+    parser.add_argument('--priority', help='Squadcast Priority', default="P3")
     args = parser.parse_args()    
     #squadcast_url = os.environ['SQUADCAST_URL']
     #build_number = int(os.environ['BUILD_NUMBER'])
