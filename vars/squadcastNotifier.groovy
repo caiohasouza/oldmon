@@ -2,7 +2,7 @@
 
 def call() {
   echo "antes"
-  def BUILD_STATUS = currentBuild.currentResult
+  env.BUILD_STATUS = currentBuild.currentResult
   def priority = "${env.PRIORITY}"
   def additionalArgs
   if(priority != null) {
