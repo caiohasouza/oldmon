@@ -3,6 +3,7 @@ import os
 import json
 import requests
 import sys
+import argparse
 
 def form_payload(build_number, job_name, build_url, status, job_status, priority):
     """Forms the python representation of the data payload to be sent from the passed configuration"""
@@ -11,10 +12,12 @@ def form_payload(build_number, job_name, build_url, status, job_status, priority
     payload_rep = {"message" : message , "description" : description,
         "build_url":  build_url, "job_name":  job_name, "build_number":  build_number,
         "status" : status, "event_id" : job_name, "priority": priority}
+    print ("1")
     return payload_rep
 
 def post_to_url(url, payload):  
     """Posts the formed payload as json to the passed url"""
+    print ("2")
     try:
         headers={
         'User-Agent': 'squadcast',
@@ -28,20 +31,31 @@ def post_to_url(url, payload):
             sys.exit(2)
 
 if __name__ == "__main__":
-    squadcast_url = os.environ['SQUADCAST_URL']
-    build_number = int(os.environ['BUILD_NUMBER'])
-    job_name = os.environ['JOB_NAME']
-    build_url = os.environ['BUILD_URL']
-    job_url = os.environ['JOB_URL']
-    #job_status = os.environ['CURRENT_BUILD_RESULT']
-    #job_status_previous = os.environ['PREVIOUS_BUILD_RESULT']
-    job_status = os.environ['BUILD_STATUS']
-    priority = os.environ.get('PRIORITY', "P3")
+    parser = argparse.ArgumentParser(description='Passing build information.')
+    parser.add_argument('--url', help='Squadcast API endpoint')
+    parser.add_argument('--build-number', help='Jenkins Build Number')
+    parser.add_argument('--job-name', help='Jenkins Job Name')
+    parser.add_argument('--build-url', help='Jenkins Build URL')
+    parser.add_argument('--job-url', help='Jenkins Job URL')
+    parser.add_argument('--build-status', help='Jenkins Build Status')
+    parser.add_argument('--priority', help='Squadcast Priority')
+    args = parser.parse_args()    
+    #squadcast_url = os.environ['SQUADCAST_URL']
+    #build_number = int(os.environ['BUILD_NUMBER'])
+    #job_name = os.environ['JOB_NAME']
+    #build_url = os.environ['BUILD_URL']
+    #job_url = os.environ['JOB_URL']
+    ##job_status = os.environ['CURRENT_BUILD_RESULT']
+    ##job_status_previous = os.environ['PREVIOUS_BUILD_RESULT']
+    #job_status = os.environ['BUILD_STATUS']
+    #priority = os.environ.get('PRIORITY', "P3")
+    #args.build-status = args.build_status
 
-    if (job_status == "FAILURE") or (job_status == "UNSTABLE") or (job_status == "ABORTED"):
-        post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "trigger", job_status, priority))
-    elif (job_status == "SUCCESS"):
-        post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "resolve", job_status, priority))
+    #print (args.build_status)
+    if (args.build_status == "FAILURE") or (args.build_status == "UNSTABLE") or (args.build_status == "ABORTED"):
+        post_to_url(args.url, form_payload(str(args.build_number), args.job_name, args.build_url, "trigger", args.build_status, args.priority))
+    elif (args.build_status == "SUCCESS"):
+        post_to_url(args.url, form_payload(str(args.build_number), args.job_name, args.build_url, "resolve", args.build_status, args.priority))
     #if (job_status_previous == "SUCCESS") and ((job_status == "UNSTABLE") or (job_status == "ABORTED") or (job_status == "FAILURE")):
     #    post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "trigger", job_status, priority))
     #    print ("Creating an incident in Squadcast!")
@@ -51,7 +65,7 @@ if __name__ == "__main__":
     #if ((job_status_previous == "UNSTABLE") or (job_status_previous == "ABORTED") or (job_status_previous == "FAILURE")) and (job_status == "SUCCESS"):
     #    post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "resolve", job_status, priority))
     #    print ("Resolving an incident in Squadcast!")
-    #else:
-    ##    print ("Not required to create an incident..")
+    else:
+        print ("Build status not found..")
     #    post_to_url(squadcast_url, form_payload(str(build_number), job_name, build_url, "trigger", job_status, priority))
     #    print ("Creating an incident in Squadcast!")
