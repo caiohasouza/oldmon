@@ -11,23 +11,20 @@ def call() {
   //  def ADDITIONAL_ARGS = "P5"
   //}
   //sh "echo ${ADDITIONAL_ARGS}"
-  def serviceNameVar
-  def dockerPath
-  def imageTagVar
-  def serviceName
+  //def priorityVar
+  //def dockerPath
+  //def imageTagVar
+  def priority
+  def additionalArgs
 
 
   // for backward compatibility
-  if(serviceName != null) {
-      serviceNameVar = "serviceName"
-      dockerPath = "dockerRepo"
-      imageTagVar = "imageTag"
+  if(priority != null) {
+      additionalArgs = "--priority ${env.PRIORITY}"
   } else {
-      serviceNameVar = "2"
-      dockerPath = "env.dockerPath"
-      imageTagVar = "env.imageTag"
+      additionalArgs = "--priority P3"
   }
-  sh "echo $serviceNameVar"
+  sh "echo $additionalArgs"
   final file = libraryResource('jenkins-squadcast-notifications.py')
   writeFile(file: 'jenkins-squadcast-notifications.py', text: file)
   //sh('chmod +x my_file.py && ./my_file.py')
