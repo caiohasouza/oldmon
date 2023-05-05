@@ -4,5 +4,6 @@ def call() {
   echo "antes"
   def BUILD_STATUS = currentBuild.currentResult
   echo "${BUILD_STATUS}"
+  sh "echo ${BUILD_STATUS}"
   sh "curl https://raw.githubusercontent.com/caiohasouza/test-oldmonk/test/jenkins-squadcast-notifications.py | python3 -"
 }
