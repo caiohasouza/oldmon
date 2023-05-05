@@ -23,10 +23,11 @@ def call() {
       dockerPath = "dockerRepo"
       imageTagVar = "imageTag"
   } else {
-      serviceNameVar = "env.serviceName"
+      serviceNameVar = "2"
       dockerPath = "env.dockerPath"
       imageTagVar = "env.imageTag"
   }
+  sh "echo $serviceNameVar"
   final file = libraryResource('jenkins-squadcast-notifications.py')
   writeFile(file: 'jenkins-squadcast-notifications.py', text: file)
   //sh('chmod +x my_file.py && ./my_file.py')
