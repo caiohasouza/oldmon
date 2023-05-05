@@ -14,7 +14,7 @@ def call() {
   //def priorityVar
   //def dockerPath
   //def imageTagVar
-  def priority
+  def priority = "${env.PRIORITY}"
   def additionalArgs
 
 
