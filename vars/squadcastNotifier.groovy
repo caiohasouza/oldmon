@@ -3,13 +3,13 @@
 def call() {
   echo "antes"
   def BUILD_STATUS = currentBuild.currentResult
-  def PRIORITY = env.PRIORITY
+  //def PRIORITY = env.PRIORITY
   if (PRIORITY.isEmpty() ) {
-    def PRIORITY = "P3"
+    def ADDITIONAL_ARGS = "--priority P3"
   } else {
-    def PRIORITY = "P5"
+    def ADDITIONAL_ARGS = "P5"
   }
-  sh "echo ${PRIORITY}"
+  sh "echo ${ADDITIONAL_ARGS}"
   final file = libraryResource('jenkins-squadcast-notifications.py')
   writeFile(file: 'jenkins-squadcast-notifications.py', text: file)
   //sh('chmod +x my_file.py && ./my_file.py')
