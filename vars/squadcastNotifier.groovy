@@ -14,6 +14,8 @@ def call() {
   def serviceNameVar
   def dockerPath
   def imageTagVar
+  def serviceName
+
 
   // for backward compatibility
   if(serviceName != null) {
