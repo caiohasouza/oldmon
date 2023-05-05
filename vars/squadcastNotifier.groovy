@@ -4,7 +4,7 @@ def call() {
   echo "antes"
   def BUILD_STATUS = currentBuild.currentResult
   def PRIORITY = env.PRIORITY
-  if (PRIORITY.isEmpty() ) {
+  if (PRIORITY.isNull() ) {
     def ADDITIONAL_ARGS = "--priority P3"
   } else {
     def ADDITIONAL_ARGS = "P5"
