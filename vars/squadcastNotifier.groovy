@@ -8,10 +8,10 @@ def call(String action) {
   }
   def priority = "${env.PRIORITY}"
   def additionalArgs
-  if(priority != null) {
-    additionalArgs = "--priority ${env.PRIORITY}"
-  } else {
+  if(priority == null) {
     additionalArgs = "--priority P3"
+  } else {
+    additionalArgs = "--priority ${env.PRIORITY}"
   }
   final file = libraryResource('jenkins-squadcast-notifications.py')
   writeFile(file: 'jenkins-squadcast-notifications.py', text: file)
