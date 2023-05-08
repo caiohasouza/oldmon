@@ -8,7 +8,7 @@ def call(String action) {
   }
   def priority = "${env.PRIORITY}"
   def additionalArgs
-  if(priority == null) {
+  if(priority == "null") {
     additionalArgs = "--priority P3"
   } else {
     additionalArgs = "--priority ${env.PRIORITY}"
