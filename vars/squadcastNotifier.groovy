@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 def call(String action) {
   def additionalArgs
+  def priority
   if(action == "start") {
     env.BUILD_STATUS = "STARTED"
     def priority = "P5"
