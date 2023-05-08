@@ -15,5 +15,5 @@ def call(String action) {
   }
   final file = libraryResource('jenkins-squadcast-notifications.py')
   writeFile(file: 'jenkins-squadcast-notifications.py', text: file)
-  sh "python3 jenkins-squadcast-notifications.py"
+  sh "python3 jenkins-squadcast-notifications.py $additionalArgs"
 }
