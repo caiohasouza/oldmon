@@ -12,12 +12,10 @@ def form_payload(build_number, job_name, build_url, status, job_status, priority
     payload_rep = {"message" : message , "description" : description,
         "build_url":  build_url, "job_name":  job_name, "build_number":  build_number,
         "status" : status, "event_id" : job_name, "priority": priority}
-    print ("1")
     return payload_rep
 
 def post_to_url(url, payload):  
     """Posts the formed payload as json to the passed url"""
-    print ("2")
     try:
         headers={
         'User-Agent': 'squadcast',
