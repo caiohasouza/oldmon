@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 def call(def action) {
-  if(action == "STARTED") {
+  if(action == "START") {
     env.BUILD_STATUS = "STARTED"
   } else {
     env.BUILD_STATUS = currentBuild.currentResult
