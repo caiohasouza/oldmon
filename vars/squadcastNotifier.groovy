@@ -1,12 +1,10 @@
 #!/usr/bin/env groovy
 def call(String action) {
-  echo "AQUI ${action}"
-  //if(action == "START") {
-  //  env.BUILD_STATUS = "STARTED"
-  //} else {
-  //  env.BUILD_STATUS = currentBuild.currentResult
-  //}
-  env.BUILD_STATUS = "STARTED"
+  if(action == "start") {
+    env.BUILD_STATUS = "STARTED"
+  } else {
+    env.BUILD_STATUS = currentBuild.currentResult
+  }
   def priority = "${env.PRIORITY}"
   def additionalArgs
   if(priority != null) {
