@@ -4,10 +4,10 @@ def call(String action) {
   def priority
   if(action == "start") {
     env.BUILD_STATUS = "STARTED"
-    priority = "P5"
+    env.priority = "P5"
   } else {
     env.BUILD_STATUS = currentBuild.currentResult
-    priority = "${env.PRIORITY}"
+    env.priority = "${env.PRIORITY}"
   }
   if(priority == "null") {
     additionalArgs = "--priority P3"
