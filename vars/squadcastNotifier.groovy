@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-def call(def action) {
+def call(String action) {
   echo "AQUI ${action}"
   //if(action == "START") {
   //  env.BUILD_STATUS = "STARTED"
