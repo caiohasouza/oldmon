@@ -1,6 +1,8 @@
 #!/usr/bin/env groovy
 def call() {
   env.BUILD_STATUS = currentBuild.currentResult
+  env.BUILD_STATUS2 = currentBuild.currentResult
+  echo ${BUILD_STATUS2}
   def priority = "${env.PRIORITY}"
   def additionalArgs
   if(priority != null) {
